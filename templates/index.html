@@ -1,0 +1,44 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Snack Store</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <h1 class="title">Welcome to Our Snack Store</h1>
+
+    <h2 class="subtitle">Menu</h2>
+    <table class="menu-table">
+        <tr>
+            <th>Code</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+        {% for code, product in products.items() %}
+        <tr>
+            <td>{{ code }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ '$ '"{:,.2f}".format(product.price).replace(",", ".") }} </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2 class="subtitle">Place Order</h2>
+    {% if message %}
+    <p class="message">{{ message }}</p>
+    {% endif %}
+    <form method="post" action="/">
+        <label for="code">Enter the desired product code:</label>
+        <input type="number" name="code" required>
+        <input type="submit" value="Add to Order" class="submit-button">
+    </form>
+
+    <form method="post" action="/checkout">
+        <input type="submit" value="Proceed to Checkout" class="submit-button">
+    </form>
+</body>
+</html>
+
+

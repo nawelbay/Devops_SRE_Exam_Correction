@@ -1,0 +1,26 @@
+<!-- checkout.html -->
+<!-- checkout.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Snack Bar - Checkout</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1 class="title">Checkout</h1>
+    <h2 class="subtitle">Total Amount: $ {{ "{:,.2f}".format(total_value).replace(",", ".") }}</h2>
+
+    <h2 class="subtitle">Order</h2>
+    <ul class="checkout-list">
+        {% for item in order %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+
+    <form method="post" action="/checkout">
+        <input type="submit" name="submit_button" value="Back" class="submit-button">
+        <input type="submit" name="submit_button" value="Finish" class="submit-button">
+    </form>
+</body>
+</html>
+
